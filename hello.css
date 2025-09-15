@@ -8,13 +8,6 @@ body {
     margin: 0;
 }
 
-
-
-
-
-
-
-
 .button {
     padding: 0.8em 1.5em;
     border: none;
@@ -28,14 +21,12 @@ body {
 
 .button:hover{
     background-color:#45a049;
-
 }
 
 .input-form {
     display: flex;
     gap: 1em;
     margin-bottom: 2em;
-    
 }
 
 #inp1 {
@@ -46,14 +37,10 @@ body {
     font-size: 1em;
 }
 
-
-
-
 #task-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    
 }
 
 #task-list li {
@@ -66,3 +53,4 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
