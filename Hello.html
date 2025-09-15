@@ -23,7 +23,8 @@
         
          newTask.textContent = taskText;
          
-         deleteButton.textContent = deleteButton.classList.add('delete-btn');
+         deleteButton.textContent = 'X';
+         deleteButton.classList.add('delete-btn')
          newTask.appendChild(deleteButton);
         
          taskList.appendChild(newTask);
@@ -42,7 +43,7 @@
        }
        function deleteTask(event) {
          const taskToRemove = event.target.parentNode;
-         taskList.removeChild(deleteTask)
+         taskList.removeChild(taskToRemove)
        }
        
      });
