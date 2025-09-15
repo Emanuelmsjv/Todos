@@ -6,8 +6,7 @@
     <script type="text/javascript" charset="utf-8">
     document.addEventListener(
      'DOMContentLoaded', () => {
-    
-    const inputField = document.getElementById('inp1')
+       const inputField = document.getElementById('inp1')
     
     const submitButton = document.getElementById('butto1')
     
@@ -19,17 +18,33 @@
       const taskText =inputField.value ;
       
       if(taskText.trim() !== '') {
-        const newTask = document.createElement('li');
+         const newTask = document.createElement('li');
+         const deleteButton = document.createElement('button');
         
-        newTask.textContent = taskText;
+         newTask.textContent = taskText;
+         
+         deleteButton.textContent = deleteButton.classList.add('delete-btn');
+         newTask.appendChild(deleteButton);
         
-        taskList.appendChild(newTask);
+         taskList.appendChild(newTask);
+         
         
-        inputField.value = ''
+         inputField.value = '';
+         
+         deleteButton.addEventListener('click',deleteTask);
+         
+         
+       
+    
+    
         
-        
-      }
-    }
+         }
+       }
+       function deleteTask(event) {
+         const taskToRemove = event.target.parentNode;
+         taskList.removeChild(deleteTask)
+       }
+       
      });
     
     
@@ -42,6 +57,7 @@
     <form class="input-form">
       <input type="text" name="task" id="inp1" placeholder="Enter the task" />
       <button id="butto1" class="button" type="button">submit</button>
+    
     </form>
     <ul id="task-list">
       
