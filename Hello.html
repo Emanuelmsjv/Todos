@@ -32,7 +32,7 @@
          deleteButton.addEventListener('click',deleteTask);
          
          const editButton = document.createElement('button');
-         editButton.textcontent =  '✍️';
+         editButton.textContent =  '✍️';
          editButton.classList.add('edit-btn');
          editButton.addEventListener('click', editTask)
          
@@ -57,18 +57,18 @@
        
        function editTask(event){
          const taskToEdit = event.target.parentNode;
-         const originalText = taskToEdit.Firstchild.textContent;
+         const originalText = taskToEdit.firstChild.textContent;
          
          const editInput = document.createElement('input');
          editInput.type = 'text';
          editInput.value = originalText;
          editInput.classList.add('edit-input');
          
-         taskToEdit.firstChild.replaceWith('editInput');
+         taskToEdit.firstChild.replaceWith(editInput);
          
          const editButton = event.target;
          
-         editButton.textContent = 'Save';
+         editButton.textContent = '✓';
          editButton.removeEventListener('click', editTask);
          
          editButton.addEventListener('click', saveTask);
@@ -77,6 +77,7 @@
        function saveTask(event) {
          const taskToSave = event.target.parentNode;
          const editInput = taskToSave.querySelector(".edit-input");
+         const newText =
          editInput.value.trim();
           if (newText !== '') {
         // Create a new text node and replace the input field
