@@ -21,19 +21,28 @@
          const newTask = document.createElement('li');
          const deleteButton = document.createElement('button');
         
-         newTask.textContent = taskText;
          
-         deleteButton.textContent = 'X';
+         
+         deleteButton.textContent = 'completed';
          deleteButton.classList.add('delete-btn')
-         newTask.appendChild(deleteButton);
+         
         
+         
+         
+         deleteButton.addEventListener('click',deleteTask);
+         
+         const editButton = document.createElement('button');
+         editButton.textcontent =  '✍️';
+         editButton.classList.add('edit-btn');
+         editButton.addEventListener('click', editTask)
+         
+         newTask.textContent= taskText;
+         newTask.appendChild(editButton);
+         newTask.appendChild(deleteButton);
          taskList.appendChild(newTask);
          
         
          inputField.value = '';
-         
-         deleteButton.addEventListener('click',deleteTask);
-         
          
        
     
@@ -45,6 +54,34 @@
          const taskToRemove = event.target.parentNode;
          taskList.removeChild(taskToRemove)
        }
+       
+       function editTask(event){
+         const taskToEdit = event.target.parentNode;
+         const originalText = taskToEdit.Firstchild.textContent;
+         
+         const editInput = document.createElement('input');
+         editInput.type = 'text';
+         editInput.value = originalText;
+         editInput.classList.add('edit-input');
+         
+         taskToEdit.firstChild.replaceWith('editInput');
+         
+         const editButton = event.target;
+         
+         editButton.textContent = 'Save';
+         editButton.removeEventListener('click', editTask);
+         
+         editButton.addEventListener('click', saveTask);
+       }
+       
+       function saveTask(event) {
+         const taskToSave = event.target.parentNode;
+         const editInput = taskToSave.querySelector(".edit-input");
+         editInput.value.trim('')
+       }
+       
+  
+
        
      });
     
