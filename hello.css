@@ -78,5 +78,16 @@ body {
     background-color: #d32f2f;
 }
 
+.edit-input {
+    background-color: #f66780;
+    color: white;
+    border: none;
+    padding: 0.4em 0.8em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-left: 1em; 
+    
+}
 
 

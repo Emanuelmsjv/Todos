@@ -77,7 +77,28 @@
        function saveTask(event) {
          const taskToSave = event.target.parentNode;
          const editInput = taskToSave.querySelector(".edit-input");
-         editInput.value.trim('')
+         editInput.value.trim();
+          if (newText !== '') {
+        // Create a new text node and replace the input field
+        const newTextNode = document.createTextNode(newText);
+        editInput.replaceWith(newTextNode);
+
+        // Change the "Save" button back to an "Edit" button
+        const saveButton = event.target;
+        saveButton.textContent = '✏️'; 
+        saveButton.removeEventListener('click', saveTask);
+        saveButton.addEventListener('click', editTask);
+    } else {
+        // If the input is empty, revert to the original text
+        const originalText = editInput.dataset.originalText; // Store this in the editTask function
+        const originalTextNode = document.createTextNode(originalText);
+        editInput.replaceWith(originalTextNode);
+
+        const saveButton = event.target;
+        saveButton.textContent = '✏️';
+        saveButton.removeEventListener('click', saveTask);
+        saveButton.addEventListener('click', editTask);
+    }
        }
        
   
