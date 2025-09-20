@@ -9,36 +9,41 @@ document.addEventListener(
         submitButton.addEventListener('click', addTask);
         loadTasks();
         
-
+        
         function addTask() {
-            const taskText = inputField.value;
+            
+        const taskText = inputField.value;
 
-            if (taskText.trim() !== '') {
-                const newTask = document.createElement('li');
-                
-                
-                const editButton = document.createElement('button');
-                editButton.textContent = '✍️'; 
-                editButton.classList.add('edit-btn');
-                editButton.addEventListener('click', editTask);
+       if (taskText.trim() !== '') {
+        const newTask = document.createElement('li');
 
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'completed';
-                deleteButton.classList.add('delete-btn');
-                deleteButton.addEventListener('click', deleteTask);
-                
-                
-                const taskTextNode = document.createTextNode(taskText);
-                newTask.appendChild(taskTextNode);
-                newTask.appendChild(editButton);
-                newTask.appendChild(deleteButton);
-                
-                taskList.appendChild(newTask);
-                inputField.value = '';
-                
-                saveTasks();
-            }
-        }
+        const editButton = document.createElement('button');
+        editButton.textContent = '✍️'; 
+        editButton.classList.add('edit-btn');
+        editButton.addEventListener('click', editTask);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'completed';
+        deleteButton.classList.add('delete-btn');
+        deleteButton.addEventListener('click', (event) => {
+            deleteTask(event);
+            addPoints(); // Increment points when a task is marked as completed
+        });
+
+        const taskTextNode = document.createTextNode(taskText);
+        newTask.appendChild(taskTextNode);
+        newTask.appendChild(editButton);
+        newTask.appendChild(deleteButton);
+
+        taskList.appendChild(newTask);
+        inputField.value = '';
+
+        saveTasks();
+      }
+    }
+        
+
+       
 
         function deleteTask(event) {
             const taskToRemove = event.target.parentNode;
@@ -97,48 +102,51 @@ document.addEventListener(
             });
             localStorage.setItem('tasks', JSON.stringify(tasks));
         }
-
-        function loadTasks() {
-            const tasks = JSON.parse(localStorage.getItem('tasks'));
-            if (tasks) {
-                tasks.forEach(taskText => {
-                    const newTask = document.createElement('li');
-                    
-                    const editButton = document.createElement('button');
-                    editButton.textContent = '✍️'; 
-                    editButton.classList.add('edit-btn');
-                    editButton.addEventListener('click', editTask);
-
-                    const deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'completed';
-                    deleteButton.classList.add('delete-btn');
-                    deleteButton.addEventListener('click', deleteTask);
-                    
-                    const taskTextNode = document.createTextNode(taskText);
-                    newTask.appendChild(taskTextNode);
-                    newTask.appendChild(editButton);
-                    newTask.appendChild(deleteButton);
-                    
-                    taskList.appendChild(newTask);
-                });
-            }
-        }
         
-        function addpoints() {
-            points ++;
-            
-            
-            document.getElementById('point-counter')
-            textContent='Points: ${points}';
-            
-            
-            // Tab to edit
-        }
-        document.querySelectorAll('mark-done').forEach(button => {
-            document.querySelector.addEventListener('click', () =>{
-                addpoints;
-            } );
+        function loadTasks() {
+    const tasks = JSON.parse(localStorage.getItem('tasks'));
+    if (tasks) {
+        tasks.forEach(taskText => {
+            const newTask = document.createElement('li');
+
+            const editButton = document.createElement('button');
+            editButton.textContent = '✍️'; 
+            editButton.classList.add('edit-btn');
+            editButton.addEventListener('click', editTask);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'completed';
+            deleteButton.classList.add('delete-btn');
+            deleteButton.addEventListener('click', (event) => {
+                deleteTask(event);
+                addPoints(); // Increment points when a task is marked as completed
+            });
+
+            const taskTextNode = document.createTextNode(taskText);
+            newTask.appendChild(taskTextNode);
+            newTask.appendChild(editButton);
+            newTask.appendChild(deleteButton);
+
+            taskList.appendChild(newTask);
+           });
+         }
+     }
+
+        
+        let points = 0;
+
+      function addPoints() {
+          points++;
+         document.getElementById('point-counter').textContent = `Points: ${points}`;
+}
+
+       document.querySelectorAll('.delete-btn').forEach(button => {
+        button.addEventListener('click', () => {
+        addPoints();
         });
+     });
+        
+        
     }
     
     
