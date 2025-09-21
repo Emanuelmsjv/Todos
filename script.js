@@ -10,37 +10,7 @@ document.addEventListener(
         loadTasks();
         
         
-        function addTask() {
-            
-        const taskText = inputField.value;
-
-       if (taskText.trim() !== '') {
-        const newTask = document.createElement('li');
-
-        const editButton = document.createElement('button');
-        editButton.textContent = '✍️'; 
-        editButton.classList.add('edit-btn');
-        editButton.addEventListener('click', editTask);
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'completed';
-        deleteButton.classList.add('delete-btn');
-        deleteButton.addEventListener('click', (event) => {
-            deleteTask(event);
-            addPoints(); // Increment points when a task is marked as completed
-        });
-
-        const taskTextNode = document.createTextNode(taskText);
-        newTask.appendChild(taskTextNode);
-        newTask.appendChild(editButton);
-        newTask.appendChild(deleteButton);
-
-        taskList.appendChild(newTask);
-        inputField.value = '';
-
-        saveTasks();
-      }
-    }
+      
         
 
        
@@ -67,6 +37,36 @@ document.addEventListener(
             editButton.removeEventListener('click', editTask);
             editButton.addEventListener('click', saveTask);
         }
+        
+        function addTask() {
+         const taskText = inputField.value;
+
+        if (taskText.trim() !== '') {
+        const newTask = document.createElement('li');
+
+        const editButton = document.createElement('button');
+        editButton.textContent = '✍️'; 
+        editButton.classList.add('edit-btn');
+        editButton.addEventListener('click', editTask);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'completed';
+        deleteButton.classList.add('delete-btn');
+        deleteButton.addEventListener('click', (event) => {
+            deleteTask(event);
+        });
+
+        const taskTextNode = document.createTextNode(taskText);
+        newTask.appendChild(taskTextNode);
+        newTask.appendChild(editButton);
+        newTask.appendChild(deleteButton);
+
+        taskList.appendChild(newTask);
+        inputField.value = '';
+
+        saveTasks();
+        }
+    }
 
         function saveTask(event) {
             const taskToSave = event.target.parentNode;
@@ -145,6 +145,44 @@ document.addEventListener(
         addPoints();
         });
      });
+     
+     
+     
+     // Function to trigger confetti animation
+function celebrate() {
+    confetti({
+        particleCount: 100, // Number of confetti particles
+        spread: 70,         // Spread angle of the confetti
+        origin: { y: 0.6 }  // Start position (y: vertical)
+    });
+}
+
+
+   function deleteTask(event) {
+    const taskToRemove = event.target.parentNode;
+    taskList.removeChild(taskToRemove);         
+    saveTasks();    
+    
+     celebrate(); 
+    
+      }
+      
+      
+      
+      function celebrate() {
+        confetti({
+        particleCount: 150,
+        spread: 100,
+        angle: 60,
+        startVelocity: 30,
+        origin: { x: 0.5, y: 0.5 },
+        colors: ['#bb0000', '#ffffff', '#0000ff'] // Custom colors
+    });
+}
+     
+     
+    
+        
         
         
     }
