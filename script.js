@@ -1,4 +1,4 @@
-let points = 0
+
 
 document.addEventListener(
     'DOMContentLoaded', () => {
@@ -13,13 +13,7 @@ document.addEventListener(
       
         
 
-       
 
-        function deleteTask(event) {
-            const taskToRemove = event.target.parentNode;
-            taskList.removeChild(taskToRemove);
-            saveTasks(); 
-        }
 
         function editTask(event) {
             const taskToEdit = event.target.parentNode;
@@ -148,14 +142,7 @@ document.addEventListener(
      
      
      
-     // Function to trigger confetti animation
-function celebrate() {
-    confetti({
-        particleCount: 100, // Number of confetti particles
-        spread: 70,         // Spread angle of the confetti
-        origin: { y: 0.6 }  // Start position (y: vertical)
-    });
-}
+    
 
 
    function deleteTask(event) {
