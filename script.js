@@ -1,4 +1,4 @@
-
+let points = 0;
 
 document.addEventListener(
     'DOMContentLoaded', () => {
@@ -8,6 +8,7 @@ document.addEventListener(
 
         submitButton.addEventListener('click', addTask);
         loadTasks();
+        loadPoints();
         
         
       
@@ -39,7 +40,7 @@ document.addEventListener(
         const newTask = document.createElement('li');
 
         const editButton = document.createElement('button');
-        editButton.textContent = '✍️'; 
+        editButton.textContent = 'Edit'; 
         editButton.classList.add('edit-btn');
         editButton.addEventListener('click', editTask);
 
@@ -48,6 +49,7 @@ document.addEventListener(
         deleteButton.classList.add('delete-btn');
         deleteButton.addEventListener('click', (event) => {
             deleteTask(event);
+            addPoints();
         });
 
         const taskTextNode = document.createTextNode(taskText);
@@ -72,7 +74,7 @@ document.addEventListener(
                 editInput.replaceWith(newTextNode);
                 
                 const saveButton = event.target;
-                saveButton.textContent = '✍️';
+                saveButton.textContent = 'Edit';
                 saveButton.removeEventListener('click', saveTask);
                 saveButton.addEventListener('click', editTask);
             } else {
@@ -81,7 +83,7 @@ document.addEventListener(
                 editInput.replaceWith(originalTextNode);
                 
                 const saveButton = event.target;
-                saveButton.textContent = '✍️';
+                saveButton.textContent = 'Edit';
                 saveButton.removeEventListener('click', saveTask);
                 saveButton.addEventListener('click', editTask);
             }
@@ -104,7 +106,7 @@ document.addEventListener(
             const newTask = document.createElement('li');
 
             const editButton = document.createElement('button');
-            editButton.textContent = '✍️'; 
+            editButton.textContent = 'Edit'; 
             editButton.classList.add('edit-btn');
             editButton.addEventListener('click', editTask);
 
@@ -127,18 +129,25 @@ document.addEventListener(
      }
 
         
-        let points = 0;
+       
 
       function addPoints() {
           points++;
          document.getElementById('point-counter').textContent = `Points: ${points}`;
+         localStorage.setItem('points',points);
+         
+          
+          
+      }
+      function loadPoints() {
+    const savedPoints = localStorage.getItem('points');
+    if (savedPoints) {
+        points = parseInt(savedPoints, 10);
+        document.getElementById('point-counter').textContent = `Points: ${points}`;
+    }
 }
-
-       document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', () => {
-        addPoints();
-        });
-     });
+      
+     
      
      
      
